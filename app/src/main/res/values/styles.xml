@@ -17,6 +17,32 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@android:color/white</item>
+
+        <!-- Typography -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.EzGas.Title</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.EzGas.Subtitle</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.EzGas.Body</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.EzGas.Caption</item>
+    </style>
+
+    <style name="TextAppearance.EzGas.Title" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/text_huge</item>
+    </style>
+
+    <style name="TextAppearance.EzGas.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="TextAppearance.EzGas.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+    </style>
+
+    <style name="TextAppearance.EzGas.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/text_small</item>
     </style>
 
 </resources>
