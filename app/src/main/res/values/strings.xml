@@ -1,3 +1,9 @@
 <resources>
+
     <string name="app_name">EzGas</string>
+
+    <string name="home_stations">Stations</string>
+    <string name="home_favorites">My Favorites</string>
+    <string name="home_report_problem">Report problem</string>
+
 </resources>

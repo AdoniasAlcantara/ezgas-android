@@ -20,9 +20,13 @@
 
         <!-- Typography -->
         <item name="textAppearanceHeadline1">@style/TextAppearance.EzGas.Title</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.EzGas.Subtitle</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.EzGas.Subtitle</item>
         <item name="textAppearanceBody1">@style/TextAppearance.EzGas.Body</item>
         <item name="textAppearanceCaption">@style/TextAppearance.EzGas.Caption</item>
+
+        <!--Widgets -->
+        <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Surface</item>
+        <item name="tabStyle">@style/Widget.EzGas.TabLayout</item>
     </style>
 
     <style name="TextAppearance.EzGas.Title" parent="TextAppearance.MaterialComponents.Headline1">
@@ -30,7 +34,7 @@
         <item name="android:textSize">@dimen/text_huge</item>
     </style>
 
-    <style name="TextAppearance.EzGas.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <style name="TextAppearance.EzGas.Subtitle" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="fontFamily">@font/rubik_medium</item>
         <item name="android:textSize">@dimen/text_large</item>
     </style>
@@ -43,6 +47,12 @@
     <style name="TextAppearance.EzGas.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+    <style name="Widget.EzGas.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/deep_purple_400</item>
+        <item name="tabRippleColor">@null</item>
+        <item name="tabTextAppearance">@style/TextAppearance.EzGas.Subtitle</item>
     </style>
 
 </resources>
