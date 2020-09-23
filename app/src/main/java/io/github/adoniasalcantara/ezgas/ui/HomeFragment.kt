@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.databinding.FragmentHomeBinding
@@ -18,6 +19,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpToolbar()
         setUpPagerWithTabs()
+        setUpFab()
     }
 
     private fun setUpToolbar() {
@@ -45,5 +47,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         TabLayoutMediator(binding.tabs, binding.pager) { tab, index ->
             tab.setText(titles[index])
         }.attach()
+    }
+
+    private fun setUpFab() {
+        binding.fabFilter.setOnClickListener {
+            // TODO show filter dialog associated with the currently selected tab
+        }
+
+        // Shrink FAB when app bar is collapsed
+        binding.appBar.addOnOffsetChangedListener(OnOffsetChangedListener { _, offset ->
+            val isAppBarCollapsed = offset == 0
+
+            binding.fabFilter.apply {
+                when {
+                    !isExtended && isAppBarCollapsed -> extend()
+                    isExtended && !isAppBarCollapsed -> shrink()
+                }
+            }
+        })
     }
 }

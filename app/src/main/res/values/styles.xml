@@ -22,10 +22,12 @@
         <item name="textAppearanceHeadline2">@style/TextAppearance.EzGas.Subtitle</item>
         <item name="textAppearanceBody1">@style/TextAppearance.EzGas.Body</item>
         <item name="textAppearanceCaption">@style/TextAppearance.EzGas.Caption</item>
+        <item name="textAppearanceButton">@style/TextAppearance.EzGas.Button</item>
 
         <!--Widgets -->
         <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Surface</item>
         <item name="tabStyle">@style/Widget.EzGas.TabLayout</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.EzGas.Fab</item>
     </style>
 
     <style name="TextAppearance.EzGas.Title" parent="TextAppearance.MaterialComponents.Headline1">
@@ -48,11 +50,17 @@
         <item name="android:textSize">@dimen/text_small</item>
     </style>
 
+    <style name="TextAppearance.EzGas.Button" parent="TextAppearance.EzGas.Subtitle" />
+
     <style name="Widget.EzGas.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabIndicatorColor">@color/deep_purple_400</item>
         <item name="tabRippleColor">@null</item>
         <item name="tabTextColor">@color/color_tabs</item>
         <item name="tabTextAppearance">@style/TextAppearance.EzGas.Subtitle</item>
+    </style>
+
+    <style name="Widget.EzGas.Fab" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+        <item name="android:minHeight">@dimen/fab_size</item>
     </style>
 
 </resources>
