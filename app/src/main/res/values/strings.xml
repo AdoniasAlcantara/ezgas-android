@@ -7,4 +7,25 @@
     <string name="home_report_problem">Report problem</string>
     <string name="home_filter">Filter</string>
 
+    <string name="filter_title">Filter</string>
+    <string name="filter_fuel">Fuel</string>
+    <string name="filter_gasoline">G</string>
+    <string name="filter_ethanol">E</string>
+    <string name="filter_diesel">D</string>
+    <string name="filter_diesel_s10">S10</string>
+    <string name="filter_sort">Sort by</string>
+    <string name="filter_price">Price</string>
+    <string name="filter_distance">Distance</string>
+    <string name="filter_distance_limit">Distance up to</string>
+    <string name="filter_distance_min">5Km</string>
+    <string name="filter_distance_max">50Km</string>
+
+    <string name="fuel_gasoline">Gasoline</string>
+    <string name="fuel_ethanol">Ethanol</string>
+    <string name="fuel_diesel">Diesel</string>
+    <string name="fuel_diesel_s10">Diesel S10</string>
+
+    <string name="misc_close">Close</string>
+    <string name="misc_apply">Apply</string>
+
 </resources>

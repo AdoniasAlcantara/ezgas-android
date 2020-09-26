@@ -3,11 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentHome">
+    app:startDestination="@id/fragment_home">
 
     <fragment
-        android:id="@+id/fragmentHome"
+        android:id="@+id/fragment_home"
         android:name="io.github.adoniasalcantara.ezgas.ui.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/start_stations_filter"
+            app:destination="@id/dialog_stations_filter" />
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/dialog_stations_filter"
+        android:name="io.github.adoniasalcantara.ezgas.ui.stations.StationsFilterDialog"
+        tools:layout="@layout/dialog_stations_filter" />
 
 </navigation>

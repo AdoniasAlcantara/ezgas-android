@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="deep_purple_400">#3D5AFE</color>
     <color name="black">#070417</color>
     <color name="dark">#4F4F4F</color>
     <color name="light">#F5F5F5</color>
-    <color name="deep_purple_400">#3D5AFE</color>
+    <color name="grey">#E9E9FF</color>
 
 </resources>

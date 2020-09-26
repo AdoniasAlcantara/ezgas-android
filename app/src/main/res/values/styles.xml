@@ -24,10 +24,17 @@
         <item name="textAppearanceCaption">@style/TextAppearance.EzGas.Caption</item>
         <item name="textAppearanceButton">@style/TextAppearance.EzGas.Button</item>
 
+        <!-- Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.EzGas.SmallRadius</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.EzGas.MediumRadius</item>
+
         <!--Widgets -->
         <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Surface</item>
         <item name="tabStyle">@style/Widget.EzGas.TabLayout</item>
+        <item name="materialButtonStyle">@style/Widget.EzGas.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.EzGas.OutlinedButton</item>
         <item name="extendedFloatingActionButtonStyle">@style/Widget.EzGas.Fab</item>
+        <item name="sliderStyle">@style/Widget.EzGas.Slider</item>
     </style>
 
     <style name="TextAppearance.EzGas.Title" parent="TextAppearance.MaterialComponents.Headline1">
@@ -52,6 +59,19 @@
 
     <style name="TextAppearance.EzGas.Button" parent="TextAppearance.EzGas.Subtitle" />
 
+    <style name="TextAppearance.EzGas.OutlinedButton" parent="TextAppearance.EzGas.Subtitle">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="ShapeAppearance.EzGas.SmallRadius" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">@dimen/radius_small</item>
+    </style>
+
+    <style name="ShapeAppearance.EzGas.MediumRadius" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">@dimen/radius_medium</item>
+    </style>
+
     <style name="Widget.EzGas.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabIndicatorColor">@color/deep_purple_400</item>
         <item name="tabRippleColor">@null</item>
@@ -59,8 +79,42 @@
         <item name="tabTextAppearance">@style/TextAppearance.EzGas.Subtitle</item>
     </style>
 
+    <style name="Widget.EzGas.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">@dimen/button_size</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.EzGas.SecondaryColorAsPrimary</item>
+    </style>
+
+    <style name="Widget.EzGas.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:minWidth">@dimen/outlined_button_size</item>
+        <item name="android:minHeight">@dimen/outlined_button_size</item>
+        <item name="android:insetTop">@dimen/outlined_button_insets</item>
+        <item name="android:insetBottom">@dimen/outlined_button_insets</item>
+        <item name="backgroundTint">@color/color_outlined_button</item>
+        <item name="strokeWidth">@dimen/outlined_button_stroke</item>
+        <item name="strokeColor">@color/grey</item>
+        <item name="rippleColor">@null</item>
+        <item name="android:textAppearance">@style/TextAppearance.EzGas.OutlinedButton</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.EzGas.MediumRadius</item>
+    </style>
+
     <style name="Widget.EzGas.Fab" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
         <item name="android:minHeight">@dimen/fab_size</item>
+    </style>
+
+    <style name="Widget.EzGas.Slider" parent="Widget.MaterialComponents.Slider">
+        <item name="trackHeight">@dimen/slider_track_height</item>
+        <item name="trackColorActive">@color/deep_purple_400</item>
+        <item name="trackColorInactive">@color/grey</item>
+        <item name="tickColor">@android:color/transparent</item>
+        <item name="thumbRadius">@dimen/slider_thumb_radius</item>
+        <item name="thumbColor">@android:color/white</item>
+        <item name="thumbElevation">@dimen/slider_thumb_elevation</item>
+        <item name="haloRadius">@dimen/slider_halo_radius</item>
+    </style>
+
+    <style name="ThemeOverlay.EzGas.SecondaryColorAsPrimary" parent="">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorOnPrimary">@android:color/white</item>
     </style>
 
 </resources>

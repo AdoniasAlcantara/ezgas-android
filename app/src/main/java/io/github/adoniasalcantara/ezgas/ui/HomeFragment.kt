@@ -3,17 +3,20 @@ package io.github.adoniasalcantara.ezgas.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.databinding.FragmentHomeBinding
+import io.github.adoniasalcantara.ezgas.ui.HomeFragmentDirections.Companion.startStationsFilter
 import io.github.adoniasalcantara.ezgas.ui.favorites.FavoritesFragment
 import io.github.adoniasalcantara.ezgas.ui.stations.StationsFragment
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+    private val navController by lazy { findNavController() }
     private val binding: FragmentHomeBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +55,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setUpFab() {
         binding.fabFilter.setOnClickListener {
             // TODO show filter dialog associated with the currently selected tab
+            navController.navigate(startStationsFilter())
         }
 
         // Shrink FAB when app bar is collapsed
