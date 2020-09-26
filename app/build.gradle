@@ -23,7 +23,6 @@ android {
     }
 
     kotlinOptions {
-        freeCompilerArgs = ["-Xinline-classes"]
         jvmTarget = "1.8"
     }
 

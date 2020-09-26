@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Fuels -->
+    <item name="gasoline" type="id" />
+    <item name="ethanol" type="id" />
+    <item name="diesel" type="id" />
+    <item name="diesel_s10" type="id" />
+
+    <!-- Sort criteria -->
+    <item name="sort_price" type="id" />
+    <item name="sort_distance" type="id" />
+
+</resources>
