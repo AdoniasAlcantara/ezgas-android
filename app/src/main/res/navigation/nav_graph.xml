@@ -14,11 +14,20 @@
             android:id="@+id/start_stations_filter"
             app:destination="@id/dialog_stations_filter" />
 
+        <action
+            android:id="@+id/start_favorites_filter"
+            app:destination="@id/dialog_favorites_filter" />
+
     </fragment>
 
     <dialog
         android:id="@+id/dialog_stations_filter"
         android:name="io.github.adoniasalcantara.ezgas.ui.stations.StationsFilterDialog"
         tools:layout="@layout/dialog_stations_filter" />
+
+    <dialog
+        android:id="@+id/dialog_favorites_filter"
+        android:name="io.github.adoniasalcantara.ezgas.ui.favorites.FavoritesFilterDialog"
+        tools:layout="@layout/dialog_favorites_filter" />
 
 </navigation>

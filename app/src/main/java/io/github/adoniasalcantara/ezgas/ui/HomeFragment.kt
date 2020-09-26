@@ -10,6 +10,7 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.databinding.FragmentHomeBinding
+import io.github.adoniasalcantara.ezgas.ui.HomeFragmentDirections.Companion.startFavoritesFilter
 import io.github.adoniasalcantara.ezgas.ui.HomeFragmentDirections.Companion.startStationsFilter
 import io.github.adoniasalcantara.ezgas.ui.favorites.FavoritesFragment
 import io.github.adoniasalcantara.ezgas.ui.stations.StationsFragment
@@ -53,9 +54,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setUpFab() {
+        // Show filter dialog associated with the currently selected page
         binding.fabFilter.setOnClickListener {
-            // TODO show filter dialog associated with the currently selected tab
-            navController.navigate(startStationsFilter())
+            when (binding.pager.currentItem) {
+                PAGE_STATIONS -> navController.navigate(startStationsFilter())
+                PAGE_FAVORITES -> navController.navigate(startFavoritesFilter())
+            }
         }
 
         // Shrink FAB when app bar is collapsed
@@ -69,5 +73,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         })
+    }
+
+    private companion object {
+        const val PAGE_STATIONS = 0
+        const val PAGE_FAVORITES = 1
     }
 }
