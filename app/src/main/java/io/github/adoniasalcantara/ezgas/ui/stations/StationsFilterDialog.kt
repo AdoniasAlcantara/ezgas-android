@@ -2,6 +2,7 @@ package io.github.adoniasalcantara.ezgas.ui.stations
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Filter
@@ -10,23 +11,28 @@ import io.github.adoniasalcantara.ezgas.data.model.SortCriteria
 import io.github.adoniasalcantara.ezgas.databinding.DialogStationsFilterBinding
 import io.github.adoniasalcantara.ezgas.ui.common.BaseDialogFragment
 import io.github.adoniasalcantara.ezgas.util.format.formatToKilometers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter) {
 
+    private val viewModel: StationsViewModel by sharedViewModel()
     private val binding: DialogStationsFilterBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setUpFuelOptions()
-        setUpSortOptions()
-        setUpDistanceSlider()
+        lifecycleScope.launch {
+            val filter = viewModel.filter.first()
+            setUpFuelOptions(filter.fuelType)
+            setUpSortOptions(filter.sortCriteria)
+            setUpDistanceSlider(filter.distance)
+        }
+
         binding.close.setOnClickListener { dismiss() }
         binding.apply.setOnClickListener { apply() }
     }
 
-    private fun setUpFuelOptions() {
-        // TODO get fuel type from view model
-        val fuelType = FuelType.GASOLINE
-
+    private fun setUpFuelOptions(fuelType: FuelType) {
         binding.fuelOptions.apply {
             addOnButtonCheckedListener { _, checkedId, _ ->
                 val fuelText = FuelType.fromId(checkedId).text
@@ -37,16 +43,11 @@ class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter)
         }
     }
 
-    private fun setUpSortOptions() {
-        // TODO get sort criteria from view model
-        val sortCriteria = SortCriteria.BY_PRICE
+    private fun setUpSortOptions(sortCriteria: SortCriteria) {
         binding.sortOptions.check(sortCriteria.id)
     }
 
-    private fun setUpDistanceSlider() {
-        // TODO get distance from view model
-        val distance = 15_000f
-
+    private fun setUpDistanceSlider(distance: Float) {
         binding.sliderDistance.apply {
             addOnChangeListener { _, value, _ ->
                 binding.selectedDistance.text = value.toInt().formatToKilometers()
@@ -70,6 +71,6 @@ class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter)
         }
 
         dismiss()
-        // TODO apply filter on view model
+        viewModel.applyFilter(filter)
     }
 }
