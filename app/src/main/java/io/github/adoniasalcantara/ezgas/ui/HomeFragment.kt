@@ -56,9 +56,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setUpFab() {
         // Show filter dialog associated with the currently selected page
         binding.fabFilter.setOnClickListener {
-            when (binding.pager.currentItem) {
-                PAGE_STATIONS -> navController.navigate(startStationsFilter())
-                PAGE_FAVORITES -> navController.navigate(startFavoritesFilter())
+            runCatching {
+                when (binding.pager.currentItem) {
+                    PAGE_STATIONS -> navController.navigate(startStationsFilter())
+                    PAGE_FAVORITES -> navController.navigate(startFavoritesFilter())
+                }
             }
         }
 
