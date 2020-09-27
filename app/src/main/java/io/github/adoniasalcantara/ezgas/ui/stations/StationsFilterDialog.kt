@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import io.github.adoniasalcantara.ezgas.R
+import io.github.adoniasalcantara.ezgas.data.model.Filter
 import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.data.model.SortCriteria
 import io.github.adoniasalcantara.ezgas.databinding.DialogStationsFilterBinding
@@ -65,7 +66,7 @@ class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter)
             val sortCriteria = SortCriteria.fromId(sortOptions.checkedButtonId)
             val distance = sliderDistance.value * 1000
 
-            FilterOptions(fuelType, sortCriteria, distance)
+            Filter(fuelType, sortCriteria, distance)
         }
 
         dismiss()
