@@ -2,6 +2,7 @@ package io.github.adoniasalcantara.ezgas.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -24,6 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setUpToolbar()
         setUpPagerWithTabs()
         setUpFab()
+        setUpBackNavigation()
     }
 
     private fun setUpToolbar() {
@@ -75,6 +77,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         })
+    }
+
+    private fun setUpBackNavigation() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            binding.pager.let {
+                if (it.currentItem == PAGE_STATIONS) {
+                    activity?.finish()
+                } else {
+                    it.setCurrentItem(PAGE_STATIONS, true)
+                }
+            }
+        }
     }
 
     private companion object {
