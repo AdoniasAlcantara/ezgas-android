@@ -15,6 +15,7 @@ import io.github.adoniasalcantara.ezgas.ui.HomeFragmentDirections.Companion.star
 import io.github.adoniasalcantara.ezgas.ui.HomeFragmentDirections.Companion.startStationsFilter
 import io.github.adoniasalcantara.ezgas.ui.favorites.FavoritesFragment
 import io.github.adoniasalcantara.ezgas.ui.stations.StationsFragment
+import io.github.adoniasalcantara.ezgas.util.navigateSafe
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -58,11 +59,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setUpFab() {
         // Show filter dialog associated with the currently selected page
         binding.fabFilter.setOnClickListener {
-            runCatching {
-                when (binding.pager.currentItem) {
-                    PAGE_STATIONS -> navController.navigate(startStationsFilter())
-                    PAGE_FAVORITES -> navController.navigate(startFavoritesFilter())
-                }
+            when (binding.pager.currentItem) {
+                PAGE_STATIONS -> navController.navigateSafe(startStationsFilter())
+                PAGE_FAVORITES -> navController.navigateSafe(startFavoritesFilter())
             }
         }
 
