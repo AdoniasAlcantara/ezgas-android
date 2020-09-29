@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.adoniasalcantara.ezgas.R
 
@@ -26,6 +27,9 @@ abstract class BaseDialogFragment(@LayoutRes private val layout: Int) :
                     val paddingTop = resources.getDimensionPixelSize(R.dimen.radius_large)
                     it.setPadding(0, paddingTop, 0, 0)
                     it.setBackgroundResource(R.drawable.bg_bottom_sheet)
+
+                    val peek = resources.displayMetrics.heightPixels
+                    BottomSheetBehavior.from(it).peekHeight = peek
                 }
             }
         }
