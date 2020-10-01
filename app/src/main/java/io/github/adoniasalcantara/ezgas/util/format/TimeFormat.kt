@@ -5,7 +5,7 @@ import io.github.adoniasalcantara.ezgas.R
 import java.time.Duration
 import java.time.OffsetDateTime
 
-fun OffsetDateTime.toRelativeTimeFromNow(context: Context): String {
+fun OffsetDateTime.formatToRelativeTimeFromNow(context: Context): String {
     val diff = Duration.between(this, OffsetDateTime.now())
     val seconds = diff.seconds
 

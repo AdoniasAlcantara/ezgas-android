@@ -6,5 +6,9 @@
     <color name="dark">#4F4F4F</color>
     <color name="light">#F5F5F5</color>
     <color name="grey">#E9E9FF</color>
+    <color name="yellow">#FFCE20</color>
+    <color name="green">#00CC00</color>
+    <color name="red">#FF0000</color>
+    <color name="maroon">#800000</color>
 
 </resources>

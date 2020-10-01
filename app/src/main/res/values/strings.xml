@@ -24,6 +24,7 @@
     <string name="fuel_ethanol">Ethanol</string>
     <string name="fuel_diesel">Diesel</string>
     <string name="fuel_diesel_s10">Diesel S10</string>
+    <string name="fuel_empty_price">---</string>
 
     <string name="timeNow">Just now</string>
 

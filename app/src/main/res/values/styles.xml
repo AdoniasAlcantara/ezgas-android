@@ -20,6 +20,7 @@
         <!-- Typography -->
         <item name="textAppearanceHeadline1">@style/TextAppearance.EzGas.Title</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.EzGas.Subtitle</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.EzGas.CardTitle</item>
         <item name="textAppearanceBody1">@style/TextAppearance.EzGas.Body</item>
         <item name="textAppearanceCaption">@style/TextAppearance.EzGas.Caption</item>
         <item name="textAppearanceButton">@style/TextAppearance.EzGas.Button</item>
@@ -31,6 +32,7 @@
         <!--Widgets -->
         <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Surface</item>
         <item name="tabStyle">@style/Widget.EzGas.TabLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.EzGas.Card</item>
         <item name="materialButtonStyle">@style/Widget.EzGas.Button</item>
         <item name="materialButtonOutlinedStyle">@style/Widget.EzGas.OutlinedButton</item>
         <item name="extendedFloatingActionButtonStyle">@style/Widget.EzGas.Fab</item>
@@ -57,11 +59,21 @@
         <item name="android:textSize">@dimen/text_small</item>
     </style>
 
+    <style name="TextAppearance.EzGas.CardTitle" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+    </style>
+
     <style name="TextAppearance.EzGas.Button" parent="TextAppearance.EzGas.Subtitle" />
 
     <style name="TextAppearance.EzGas.OutlinedButton" parent="TextAppearance.EzGas.Subtitle">
         <item name="fontFamily">@font/rubik</item>
         <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="TextAppearance.EzGas.Currency" parent="">
+        <item name="fontFamily">@font/titillium_web</item>
+        <item name="android:textSize">@dimen/card_price</item>
     </style>
 
     <style name="ShapeAppearance.EzGas.SmallRadius" parent="ShapeAppearance.MaterialComponents.SmallComponent">
@@ -79,6 +91,10 @@
         <item name="tabTextAppearance">@style/TextAppearance.EzGas.Subtitle</item>
     </style>
 
+    <style name="Widget.EzGas.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">@dimen/card_elevation</item>
+    </style>
+
     <style name="Widget.EzGas.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:minHeight">@dimen/button_size</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.EzGas.SecondaryColorAsPrimary</item>
@@ -93,7 +109,6 @@
         <item name="strokeWidth">@dimen/outlined_button_stroke</item>
         <item name="strokeColor">@color/grey</item>
         <item name="rippleColor">@null</item>
-        <item name="android:textAppearance">@style/TextAppearance.EzGas.OutlinedButton</item>
         <item name="shapeAppearance">@style/ShapeAppearance.EzGas.MediumRadius</item>
     </style>
 

@@ -14,10 +14,10 @@ private val currencyFormat = NumberFormat.getNumberInstance().apply {
     minimumFractionDigits = 2
 }
 
-fun BigDecimal.toBRL(): CharSequence = "R$" + currencyFormat.format(this)
+fun BigDecimal.formatToBRL(): CharSequence = "R$" + currencyFormat.format(this)
 
-fun BigDecimal.toBRLSuperscript(): CharSequence {
-    val brl = this.toBRL()
+fun BigDecimal.formatToBRLSuperscript(): CharSequence {
+    val brl = this.formatToBRL()
     val range = 0..2
 
     return SpannableString(brl).also {
