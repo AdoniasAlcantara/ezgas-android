@@ -20,18 +20,27 @@ class StationsViewModel(
 
     private var lastJob: Job? = null
 
+    private val _isLocationPending = MutableLiveData(true)
+    val isLocationPending: LiveData<Boolean> = _isLocationPending
+
     private val location = MutableLiveData<Location>()
 
     val filter = settings.filterFlow.asLiveData()
 
     val stations = combineSwitchMap(location, filter, ::doSearch)
 
+    fun applyFilter(filter: Filter) {
+        viewModelScope.launch { settings.setFilter(filter) }
+    }
+
     fun searchNearbyStations(location: Location) {
+        _isLocationPending.value = false
         this.location.value = location
     }
 
-    fun applyFilter(filter: Filter) {
-        viewModelScope.launch { settings.setFilter(filter) }
+    fun notifyPendingLocation() {
+        _isLocationPending.value = true
+        this.location.value = null // Clear last location
     }
 
     private fun doSearch(location: Location, filter: Filter): LiveData<NearbyResult> {
