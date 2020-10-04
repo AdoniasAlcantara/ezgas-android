@@ -6,6 +6,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { StationsViewModel(settings = get()) }
+    viewModel { StationsViewModel(repository = get(), settings = get()) }
+
     viewModel { FavoritesViewModel(settings = get()) }
 }

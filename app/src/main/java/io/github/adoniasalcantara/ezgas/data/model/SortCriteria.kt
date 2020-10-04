@@ -5,13 +5,13 @@ import io.github.adoniasalcantara.ezgas.R
 
 enum class SortCriteria(val id: Int) {
 
-    BY_PRICE(R.id.sort_price),
-    BY_DISTANCE(R.id.sort_distance);
+    PRICE(R.id.sort_price),
+    DISTANCE(R.id.sort_distance);
 
     companion object {
         fun fromId(@IdRes id: Int) = when (id) {
-            R.id.sort_price -> BY_PRICE
-            R.id.sort_distance -> BY_DISTANCE
+            R.id.sort_price -> PRICE
+            R.id.sort_distance -> DISTANCE
             else -> throw IllegalArgumentException("Invalid given ID: $id")
         }
     }

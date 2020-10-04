@@ -2,7 +2,6 @@ package io.github.adoniasalcantara.ezgas.ui.stations
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Filter
@@ -11,8 +10,6 @@ import io.github.adoniasalcantara.ezgas.data.model.SortCriteria
 import io.github.adoniasalcantara.ezgas.databinding.DialogStationsFilterBinding
 import io.github.adoniasalcantara.ezgas.ui.common.BaseDialogFragment
 import io.github.adoniasalcantara.ezgas.util.format.formatToKilometers
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter) {
@@ -21,11 +18,10 @@ class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter)
     private val binding: DialogStationsFilterBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lifecycleScope.launch {
-            val filter = viewModel.filter.first()
-            setUpFuelOptions(filter.fuelType)
-            setUpSortOptions(filter.sortCriteria)
-            setUpDistanceSlider(filter.distance)
+        viewModel.filter.observe(viewLifecycleOwner) {
+            setUpFuelOptions(it.fuelType)
+            setUpSortOptions(it.sortCriteria)
+            setUpDistanceSlider(it.distance)
         }
 
         binding.close.setOnClickListener { dismiss() }

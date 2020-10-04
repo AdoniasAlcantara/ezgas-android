@@ -19,7 +19,7 @@ class FilterSettings(context: Context) {
                 ?: FuelType.GASOLINE,
 
             sortCriteria = prefs[SORT_CRITERIA]?.let(SortCriteria::valueOf)
-                ?: SortCriteria.BY_PRICE,
+                ?: SortCriteria.PRICE,
 
             distance = prefs[DISTANCE] ?: 25_000f
         )
