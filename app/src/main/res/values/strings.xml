@@ -26,22 +26,24 @@
     <string name="fuel_diesel_s10">Diesel S10</string>
     <string name="fuel_empty_price">---</string>
 
-    <string name="timeNow">Just now</string>
+    <string name="time_now">Just now</string>
 
-    <plurals name="timeMinutes">
+    <plurals name="time_minutes">
         <item quantity="one">%d minute ago</item>
         <item quantity="other">%d minutes ago</item>
     </plurals>
 
-    <plurals name="timeHours">
+    <plurals name="time_hours">
         <item quantity="one">%d hour ago</item>
         <item quantity="other">%d hours ago</item>
     </plurals>
 
-    <plurals name="timeDays">
+    <plurals name="time_days">
         <item quantity="one">%d day ago</item>
         <item quantity="other">%d days ago</item>
     </plurals>
+
+    <string name="time_infinity">%d+ days ago</string>
 
     <string name="misc_close">Close</string>
     <string name="misc_apply">Apply</string>
