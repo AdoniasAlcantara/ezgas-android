@@ -10,9 +10,12 @@ import io.github.adoniasalcantara.ezgas.data.model.Station
 import io.github.adoniasalcantara.ezgas.databinding.LayoutStationListBinding
 import io.github.adoniasalcantara.ezgas.ui.common.SpacingDecoration
 import io.github.adoniasalcantara.ezgas.util.location.LocationLiveData
+import io.github.adoniasalcantara.ezgas.util.location.LocationSettingsResolver
 import io.github.adoniasalcantara.ezgas.util.location.LocationUpdate
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.parameter.parametersOf
 
 class StationsFragment : Fragment(R.layout.layout_station_list) {
 
@@ -20,8 +23,14 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
     private val binding: LayoutStationListBinding by viewBinding()
     private val adapter: StationsAdapter by inject()
     private val locationUpdates: LocationLiveData by inject()
+    private val locationResolver: LocationSettingsResolver = get { parametersOf(this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // Make sure the location provider is enabled at startup
+        if (savedInstanceState == null) {
+            locationResolver.resolve(requireContext())
+        }
+
         setUpList()
         setUpRefresh()
         setUpSubscribers()
@@ -47,7 +56,7 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
                     viewModel.searchNearbyStations(lastUpdate.location)
                 } else {
                     viewModel.notifyPendingLocation()
-                    // TODO ask user to change location settings as needed
+                    locationResolver.resolve(requireContext())
                 }
             }
         }
@@ -67,9 +76,7 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
         }
 
         locationUpdates.observe(viewLifecycleOwner) { update ->
-            val isLocationPending = viewModel.isLocationPending.value!!
-
-            if (isLocationPending && update is LocationUpdate.Available) {
+            if (viewModel.isLocationPending.value!! && update is LocationUpdate.Available) {
                 viewModel.searchNearbyStations(update.location)
             }
         }
