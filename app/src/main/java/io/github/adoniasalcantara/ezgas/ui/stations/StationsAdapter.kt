@@ -30,6 +30,8 @@ class StationsAdapter(private val assets: AssetsCache) :
         getItem(position)?.let { station -> holder.bind(station, fuelType) }
     }
 
+    fun isEmpty() = itemCount == 0
+
     private class StationDiffer : DiffUtil.ItemCallback<Station>() {
 
         override fun areItemsTheSame(oldItem: Station, newItem: Station): Boolean {

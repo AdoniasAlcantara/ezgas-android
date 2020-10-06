@@ -45,7 +45,18 @@
 
     <string name="time_infinity">%d+ days ago</string>
 
+    <string name="error">Error</string>
+    <string name="error_retry">Retry</string>
+    <string name="error_no_results_title">No results</string>
+    <string name="error_no_results_message">Please try changing filter options to get more results.</string>
+    <string name="error_network_title">Network Error</string>
+    <string name="error_network_message">Please check your Internet connection and try again.</string>
+    <string name="error_unexpected">Sorry, an unexpected error occurred</string>
+    <string name="error_unavailable">Service unavailable</string>
+    <string name="error_code">Error code: %d</string>
+
     <string name="misc_close">Close</string>
     <string name="misc_apply">Apply</string>
+    <string name="misc_refresh">Refresh</string>
 
 </resources>

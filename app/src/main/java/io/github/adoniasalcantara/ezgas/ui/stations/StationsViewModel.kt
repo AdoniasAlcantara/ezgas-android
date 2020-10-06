@@ -10,7 +10,6 @@ import io.github.adoniasalcantara.ezgas.data.repository.StationRepository
 import io.github.adoniasalcantara.ezgas.data.settings.FilterSettings
 import io.github.adoniasalcantara.ezgas.util.combineSwitchMap
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
@@ -41,7 +40,6 @@ class StationsViewModel(
 
     fun notifyPendingLocation() {
         _isLocationPending.value = true
-        this.location.value = null // Clear last location
     }
 
     private fun doSearch(location: Location, filter: Filter): LiveData<NearbyResult> {
@@ -59,14 +57,8 @@ class StationsViewModel(
             filter.sortCriteria
         )
 
-        return liveData {
-            // Force clearing the list
-            emit(NearbyResult.empty())
-
-            // Send the actual result from repository
-            repository.searchNearby(query)
-                .cachedIn(viewModelScope + currentJob)
-                .collectLatest { result -> emit(result) }
-        }
+        return repository.searchNearby(query)
+            .cachedIn(viewModelScope + currentJob)
+            .asLiveData()
     }
 }

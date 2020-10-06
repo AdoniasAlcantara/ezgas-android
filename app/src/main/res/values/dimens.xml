@@ -33,6 +33,9 @@
     <dimen name="slider_thumb_elevation">3dp</dimen>
     <dimen name="slider_halo_radius">32dp</dimen>
 
+    <dimen name="progress_radius">32dp</dimen>
+    <dimen name="progress_indicator_size">8dp</dimen>
+
     <dimen name="card_elevation">0dp</dimen>
     <dimen name="card_brand">42dp</dimen>
     <dimen name="card_price">28sp</dimen>

@@ -3,6 +3,9 @@ package io.github.adoniasalcantara.ezgas.ui.stations
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
+import androidx.paging.LoadState
+import androidx.paging.PagingData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.color.MaterialColors
 import io.github.adoniasalcantara.ezgas.R
@@ -16,6 +19,8 @@ import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.parameter.parametersOf
+import retrofit2.HttpException
+import java.io.IOException
 
 class StationsFragment : Fragment(R.layout.layout_station_list) {
 
@@ -25,12 +30,14 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
     private val locationUpdates: LocationLiveData by inject()
     private val locationResolver: LocationSettingsResolver = get { parametersOf(this) }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // Make sure the location provider is enabled at startup
-        if (savedInstanceState == null) {
-            locationResolver.resolve(requireContext())
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+        // Make sure the location is enabled at startup
+        savedInstanceState ?: locationResolver.resolve(requireContext())
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpList()
         setUpRefresh()
         setUpSubscribers()
@@ -49,22 +56,15 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
         binding.refresh.let {
             val color = MaterialColors.getColor(it, R.attr.colorPrimary)
             it.setColorSchemeColors(color)
-            it.setOnRefreshListener {
-                val lastUpdate = locationUpdates.value
-
-                if (lastUpdate is LocationUpdate.Available) {
-                    viewModel.searchNearbyStations(lastUpdate.location)
-                } else {
-                    viewModel.notifyPendingLocation()
-                    locationResolver.resolve(requireContext())
-                }
-            }
+            it.setOnRefreshListener { refreshNearbyStations() }
         }
     }
 
     private fun setUpSubscribers() {
         viewModel.filter.observe(viewLifecycleOwner) {
+            // Clear list whenever the filter changes
             adapter.fuelType = it.fuelType
+            adapter.submitData(viewLifecycleOwner.lifecycle, PagingData.empty())
         }
 
         viewModel.stations.observe(viewLifecycleOwner) {
@@ -72,17 +72,91 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
         }
 
         viewModel.isLocationPending.observe(viewLifecycleOwner) {
-            // TODO show a loading spinner when location is pending
+            showAwaitingLocation(it)
         }
 
         locationUpdates.observe(viewLifecycleOwner) { update ->
-            if (viewModel.isLocationPending.value!! && update is LocationUpdate.Available) {
-                viewModel.searchNearbyStations(update.location)
+            viewModel.apply {
+                if (isLocationPending.value!! && update is LocationUpdate.Available) {
+                    searchNearbyStations(update.location)
+                }
             }
+        }
+
+        adapter.loadStateFlow.asLiveData().observe(viewLifecycleOwner) { states ->
+            binding.apply {
+                when (val state = states.refresh) {
+                    is LoadState.NotLoading -> {
+                        refresh.isRefreshing = false
+                        loading.hide()
+                    }
+
+                    is LoadState.Loading -> if (adapter.isEmpty()) {
+                        loading.showLoading()
+                    }
+
+                    is LoadState.Error -> {
+                        refresh.isRefreshing = false
+                        handleError(state.error)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun refreshNearbyStations() {
+        val lastUpdate = locationUpdates.value
+
+        if (lastUpdate is LocationUpdate.Available) {
+            viewModel.searchNearbyStations(lastUpdate.location)
+        } else {
+            viewModel.notifyPendingLocation()
+            locationResolver.resolve(requireContext())
         }
     }
 
     private fun showStationDetails(station: Station) {
         // TODO navigate to station details
+    }
+
+    private fun showAwaitingLocation(isAwaiting: Boolean) {
+        // TODO warning user about pending location status
+    }
+
+    private fun handleError(error: Throwable) {
+        binding.loading.apply {
+            when (error) {
+                is HttpException -> if (error.code() == 404) {
+                    showError {
+                        image(R.drawable.img_no_results)
+                        title(R.string.error_no_results_title)
+                        message(R.string.error_no_results_message)
+                        retryText(R.string.misc_refresh)
+                        retryCallback = ::refreshNearbyStations
+                    }
+                } else {
+                    showError {
+                        image(R.drawable.img_unavailable)
+                        title(R.string.error_unavailable)
+                        message = getString(R.string.error_code, error.code())
+                        retryCallback = ::refreshNearbyStations
+                    }
+                }
+
+                is IOException -> showError {
+                    image(R.drawable.img_no_connection)
+                    title(R.string.error_network_title)
+                    message(R.string.error_network_message)
+                    retryCallback = ::refreshNearbyStations
+                }
+
+                else -> showError {
+                    image(R.drawable.ic_error)
+                    title(R.string.error)
+                    message(R.string.error_unexpected)
+                    retryCallback = ::refreshNearbyStations
+                }
+            }
+        }
     }
 }

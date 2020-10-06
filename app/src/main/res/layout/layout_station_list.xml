@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/station_list"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/station_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:paddingBottom="64dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/layout_station_item" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <io.github.adoniasalcantara.ezgas.ui.widget.LoadingView
+        android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingHorizontal="@dimen/spacing_medium"
-        android:paddingBottom="64dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/layout_station_item" />
+        android:visibility="gone" />
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</FrameLayout>
