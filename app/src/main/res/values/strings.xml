@@ -58,5 +58,6 @@
     <string name="misc_close">Close</string>
     <string name="misc_apply">Apply</string>
     <string name="misc_refresh">Refresh</string>
+    <string name="misc_awaiting_location">Awaiting location…</string>
 
 </resources>

@@ -8,6 +8,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.snackbar.Snackbar
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Station
 import io.github.adoniasalcantara.ezgas.databinding.LayoutStationListBinding
@@ -29,6 +30,10 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
     private val adapter: StationsAdapter by inject()
     private val locationUpdates: LocationLiveData by inject()
     private val locationResolver: LocationSettingsResolver = get { parametersOf(this) }
+
+    private val snackbar by lazy {
+        Snackbar.make(requireView(), R.string.misc_awaiting_location, Snackbar.LENGTH_INDEFINITE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +76,8 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        viewModel.isLocationPending.observe(viewLifecycleOwner) {
-            showAwaitingLocation(it)
+        viewModel.isLocationPending.observe(viewLifecycleOwner) { isPending ->
+            if (isPending) snackbar.show() else snackbar.dismiss()
         }
 
         locationUpdates.observe(viewLifecycleOwner) { update ->
@@ -117,10 +122,6 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
 
     private fun showStationDetails(station: Station) {
         // TODO navigate to station details
-    }
-
-    private fun showAwaitingLocation(isAwaiting: Boolean) {
-        // TODO warning user about pending location status
     }
 
     private fun handleError(error: Throwable) {

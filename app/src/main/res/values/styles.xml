@@ -37,6 +37,7 @@
         <item name="materialButtonOutlinedStyle">@style/Widget.EzGas.OutlinedButton</item>
         <item name="extendedFloatingActionButtonStyle">@style/Widget.EzGas.Fab</item>
         <item name="sliderStyle">@style/Widget.EzGas.Slider</item>
+        <item name="snackbarStyle">@style/Widget.EzGas.Snackbar</item>
     </style>
 
     <style name="TextAppearance.EzGas.Title" parent="TextAppearance.MaterialComponents.Headline1">
@@ -125,6 +126,11 @@
         <item name="thumbColor">@android:color/white</item>
         <item name="thumbElevation">@dimen/slider_thumb_elevation</item>
         <item name="haloRadius">@dimen/slider_halo_radius</item>
+    </style>
+
+    <style name="Widget.EzGas.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="backgroundTint">@color/black</item>
+        <item name="animationMode">slide</item>
     </style>
 
     <style name="ThemeOverlay.EzGas.SecondaryColorAsPrimary" parent="">
