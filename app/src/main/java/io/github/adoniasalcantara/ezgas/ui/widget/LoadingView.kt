@@ -59,7 +59,7 @@ class LoadingView : FrameLayout {
             .setDuration(ANIMATION_DURATION)
             .alpha(0f)
             .withEndAction { isVisible = false }
-
+            .start()
     }
 
     private fun show() {
@@ -67,6 +67,7 @@ class LoadingView : FrameLayout {
             .setDuration(ANIMATION_DURATION)
             .alpha(1f)
             .withStartAction { isVisible = true }
+            .start()
     }
 
     private companion object {
