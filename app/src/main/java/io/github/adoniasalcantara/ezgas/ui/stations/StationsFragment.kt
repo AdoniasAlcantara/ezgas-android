@@ -49,9 +49,11 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
     }
 
     private fun setUpList() {
+        val loadAdapter = LoadAdapter(adapter::retry)
+        adapter.onStationClick = ::showStationDetails
+
         binding.stationList.let {
-            adapter.onStationClick = ::showStationDetails
-            it.adapter = adapter
+            it.adapter = adapter.withLoadStateFooter(loadAdapter)
             it.addItemDecoration(SpacingDecoration(requireContext(), R.dimen.spacing_medium))
             it.setHasFixedSize(true)
         }
