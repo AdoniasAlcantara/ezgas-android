@@ -2,6 +2,7 @@ package io.github.adoniasalcantara.ezgas.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.switchMap
 
 fun <F : Any, S: Any> combine(
@@ -17,12 +18,12 @@ fun <F : Any, S: Any> combine(
         }
     }
 
-    mediator.addSource(firstSource) {
+    mediator.addSource(firstSource.distinctUntilChanged()) {
         firstValue = it
         dispatchWhenReady()
     }
 
-    mediator.addSource(secondSource) {
+    mediator.addSource(secondSource.distinctUntilChanged()) {
         secondValue = it
         dispatchWhenReady()
     }
