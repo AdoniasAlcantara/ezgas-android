@@ -24,13 +24,10 @@
 
         <TextView
             android:id="@+id/company"
+            style="@style/FadingEdge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_small"
-            android:ellipsize="none"
-            android:fadingEdgeLength="@dimen/text_fading_edge"
-            android:requiresFadingEdge="horizontal"
-            android:singleLine="true"
             android:textAppearance="?attr/textAppearanceHeadline3"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toTopOf="@id/address"
@@ -42,14 +39,11 @@
 
         <TextView
             android:id="@+id/address"
+            style="@style/FadingEdge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_tiny"
-            android:ellipsize="none"
-            android:fadingEdgeLength="@dimen/text_fading_edge"
-            android:requiresFadingEdge="horizontal"
-            android:singleLine="true"
             android:textAppearance="?attr/textAppearanceCaption"
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintBottom_toTopOf="@id/distance"

@@ -138,4 +138,11 @@
         <item name="colorSecondary">@color/deep_purple_400</item>
     </style>
 
+    <style name="FadingEdge">
+        <item name="android:ellipsize">none</item>
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">@dimen/text_fading_edge</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
 </resources>
