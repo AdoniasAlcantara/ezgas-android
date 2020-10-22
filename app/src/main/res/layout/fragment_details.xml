@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/scene_details">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="?attr/actionBarSize" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:id="@+id/scrim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorSurface" />
+
+    <Button
+        android:id="@+id/back"
+        style="@style/Widget.EzGas.MiniButton.IconOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        app:icon="@drawable/ic_back"
+        app:layout_constraintBottom_toTopOf="@id/guideline_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <io.github.adoniasalcantara.ezgas.ui.widget.LockableScrollView
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:paddingTop="@dimen/spacing_huge"
+        tools:background="@drawable/bg_bottom_sheet">
+
+        <LinearLayout
+            android:id="@+id/contents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/spacing_huge">
+
+            <TextView
+                android:id="@+id/company"
+                style="@style/FadingEdge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceHeadline2"
+                android:textColor="?attr/colorOnSurface"
+                tools:text="Super Fast Gas Inc." />
+
+            <TextView
+                android:id="@+id/address"
+                style="@style/FadingEdge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="?android:textColorSecondary"
+                tools:text="0, Fool's St, Somewhere" />
+
+            <TextView
+                android:id="@+id/city_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="?android:textColorSecondary"
+                tools:text="Ilhéus, Bahia" />
+
+        </LinearLayout>
+    </io.github.adoniasalcantara.ezgas.ui.widget.LockableScrollView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

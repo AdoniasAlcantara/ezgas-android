@@ -3,30 +3,24 @@
 
     <item>
         <shape android:shape="rectangle">
-
             <solid android:color="?attr/colorSurface" />
 
             <corners
                 android:topLeftRadius="@dimen/radius_large"
                 android:topRightRadius="@dimen/radius_large" />
-
         </shape>
     </item>
 
     <item
+        android:id="@+id/handle"
+        android:width="@dimen/handle_width"
+        android:height="@dimen/handle_height"
         android:gravity="center_horizontal|top"
         android:top="@dimen/spacing_medium">
 
         <shape android:shape="rectangle">
-
-            <size
-                android:width="@dimen/handle_width"
-                android:height="@dimen/handle_height" />
-
             <solid android:color="@color/grey" />
-
             <corners android:radius="@dimen/handle_radius" />
-
         </shape>
     </item>
 

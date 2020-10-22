@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/fragment_home">
 
+    <!-- Home -->
     <fragment
         android:id="@+id/fragment_home"
         android:name="io.github.adoniasalcantara.ezgas.ui.HomeFragment"
@@ -20,6 +21,27 @@
 
     </fragment>
 
+    <!-- Details -->
+    <fragment
+        android:id="@+id/fragment_details"
+        android:name="io.github.adoniasalcantara.ezgas.ui.details.DetailsFragment"
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="station"
+            app:argType="io.github.adoniasalcantara.ezgas.data.model.Station" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/start_details"
+        app:destination="@id/fragment_details"
+        app:enterAnim="@anim/slide_in_top"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_bottom" />
+
+    <!-- Filters -->
     <dialog
         android:id="@+id/dialog_stations_filter"
         android:name="io.github.adoniasalcantara.ezgas.ui.stations.StationsFilterDialog"

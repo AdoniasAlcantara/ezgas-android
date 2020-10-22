@@ -96,9 +96,25 @@
         <item name="cardElevation">@dimen/card_elevation</item>
     </style>
 
+    <style name="Widget.EzGas.Card.Outlined">
+        <item name="strokeWidth">@dimen/card_stroke</item>
+        <item name="strokeColor">@color/grey</item>
+    </style>
+
     <style name="Widget.EzGas.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:minHeight">@dimen/button_size</item>
+        <item name="android:minHeight">@dimen/button_height</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.EzGas.SecondaryColorAsPrimary</item>
+    </style>
+
+    <style name="Widget.EzGas.MiniButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:minWidth">@dimen/button_mini_width</item>
+        <item name="android:minHeight">@dimen/button_mini_height</item>
+        <item name="android:insetTop">@dimen/button_mini_insets</item>
+        <item name="android:insetBottom">@dimen/button_mini_insets</item>
+    </style>
+
+    <style name="Widget.EzGas.MiniButton.IconOnly">
+        <item name="iconPadding">0dp</item>
     </style>
 
     <style name="Widget.EzGas.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">

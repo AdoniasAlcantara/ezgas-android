@@ -21,7 +21,12 @@
     <dimen name="handle_height">8dp</dimen>
     <dimen name="handle_radius">4dp</dimen>
 
-    <dimen name="button_size">64dp</dimen>
+    <dimen name="button_height">64dp</dimen>
+
+    <dimen name="button_mini_width">48dp</dimen>
+    <dimen name="button_mini_height">42dp</dimen>
+    <dimen name="button_mini_insets">0dp</dimen>
+
     <dimen name="fab_size">56dp</dimen>
 
     <dimen name="outlined_button_size">48dp</dimen>
@@ -38,7 +43,10 @@
 
     <dimen name="card_height">80dp</dimen>
     <dimen name="card_elevation">0dp</dimen>
+    <dimen name="card_stroke">1dp</dimen>
     <dimen name="card_brand">42dp</dimen>
     <dimen name="card_price">28sp</dimen>
+
+    <dimen name="sheet_peek">124dp</dimen>
 
 </resources>

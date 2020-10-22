@@ -20,6 +20,8 @@
     <string name="filter_distance_min">5Km</string>
     <string name="filter_distance_max">50Km</string>
 
+    <string name="station_city_state">%s, %s</string>
+
     <string name="fuel_gasoline">Gasoline</string>
     <string name="fuel_ethanol">Ethanol</string>
     <string name="fuel_diesel">Diesel</string>

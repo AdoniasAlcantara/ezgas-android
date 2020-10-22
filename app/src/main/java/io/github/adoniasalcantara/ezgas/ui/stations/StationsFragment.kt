@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.Snackbar
+import io.github.adoniasalcantara.ezgas.NavGraphDirections.Companion.startDetails
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Station
 import io.github.adoniasalcantara.ezgas.databinding.LayoutStationListBinding
@@ -26,6 +28,7 @@ import java.io.IOException
 class StationsFragment : Fragment(R.layout.layout_station_list) {
 
     private val viewModel: StationsViewModel by sharedViewModel()
+    private val navController by lazy { findNavController() }
     private val binding: LayoutStationListBinding by viewBinding()
     private val adapter: StationsAdapter by inject()
     private val locationUpdates: LocationLiveData by inject()
@@ -123,7 +126,7 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
     }
 
     private fun showStationDetails(station: Station) {
-        // TODO navigate to station details
+        navController.navigate(startDetails(station))
     }
 
     private fun handleError(error: Throwable) {
