@@ -109,8 +109,10 @@
     <style name="Widget.EzGas.MiniButton" parent="Widget.MaterialComponents.Button">
         <item name="android:minWidth">@dimen/button_mini_width</item>
         <item name="android:minHeight">@dimen/button_mini_height</item>
+        <item name="android:paddingHorizontal">@dimen/button_mini_spacing</item>
         <item name="android:insetTop">@dimen/button_mini_insets</item>
         <item name="android:insetBottom">@dimen/button_mini_insets</item>
+        <item name="iconPadding">4dp</item>
     </style>
 
     <style name="Widget.EzGas.MiniButton.IconOnly">

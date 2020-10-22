@@ -25,6 +25,7 @@
 
     <dimen name="button_mini_width">48dp</dimen>
     <dimen name="button_mini_height">42dp</dimen>
+    <dimen name="button_mini_spacing">12dp</dimen>
     <dimen name="button_mini_insets">0dp</dimen>
 
     <dimen name="fab_size">56dp</dimen>
@@ -47,6 +48,6 @@
     <dimen name="card_brand">42dp</dimen>
     <dimen name="card_price">28sp</dimen>
 
-    <dimen name="sheet_peek">124dp</dimen>
+    <dimen name="sheet_peek">90dp</dimen>
 
 </resources>

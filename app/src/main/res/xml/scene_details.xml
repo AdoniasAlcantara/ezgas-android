@@ -52,6 +52,9 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/checkBox" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/middle">
@@ -79,7 +82,7 @@
         <Constraint
             android:id="@+id/bottom_sheet"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/sheet_peek"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />

@@ -37,10 +37,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/direction"
+        style="@style/Widget.EzGas.MiniButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_location"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_top"
+        app:layout_constraintEnd_toEndOf="@id/favorite"
+        app:layout_constraintStart_toStartOf="@id/back"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="14.2Km" />
+
+    <CheckBox
+        android:id="@+id/favorite"
+        android:layout_width="@dimen/button_mini_width"
+        android:layout_height="@dimen/button_mini_height"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:background="@drawable/btn_favorite"
+        android:button="@null"
+        app:layout_constraintBottom_toTopOf="@id/guideline_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <io.github.adoniasalcantara.ezgas.ui.widget.LockableScrollView
         android:id="@+id/bottom_sheet"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:paddingTop="@dimen/spacing_huge"
         tools:background="@drawable/bg_bottom_sheet">
@@ -64,25 +87,51 @@
                 tools:text="Super Fast Gas Inc." />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_huge"
+                android:text="@string/details_brand"
+                android:textAppearance="?attr/textAppearanceCaption" />
+
+            <TextView
+                android:id="@+id/brand"
+                style="@style/FadingEdge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:textAppearance="?attr/textAppearanceBody1"
+                tools:text="Kaboom East Oil" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/details_address"
+                android:textAppearance="?attr/textAppearanceCaption" />
+
+            <TextView
                 android:id="@+id/address"
                 style="@style/FadingEdge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:gravity="center"
+                android:layout_marginTop="@dimen/spacing_tiny"
                 android:textAppearance="?attr/textAppearanceBody1"
-                android:textColor="?android:textColorSecondary"
                 tools:text="0, Fool's St, Somewhere" />
 
             <TextView
                 android:id="@+id/city_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_small"
-                android:gravity="center"
                 android:textAppearance="?attr/textAppearanceBody1"
-                android:textColor="?android:textColorSecondary"
                 tools:text="Ilhéus, Bahia" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_tiny"
+                android:text="@string/details_fuels"
+                android:textAppearance="?attr/textAppearanceCaption" />
 
         </LinearLayout>
     </io.github.adoniasalcantara.ezgas.ui.widget.LockableScrollView>

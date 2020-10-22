@@ -3,30 +3,35 @@ package io.github.adoniasalcantara.ezgas.ui.details
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Fuel
-import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.databinding.FragmentDetailsBinding
 import io.github.adoniasalcantara.ezgas.databinding.LayoutFuelBinding
 import io.github.adoniasalcantara.ezgas.ui.common.TransitionListenerAdapter
 import io.github.adoniasalcantara.ezgas.util.format.formatToBRLSuperscript
+import io.github.adoniasalcantara.ezgas.util.format.formatToKilometers
 import io.github.adoniasalcantara.ezgas.util.format.formatToRelativeTimeFromNow
-import java.math.BigDecimal
-import java.time.OffsetDateTime
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private val args: DetailsFragmentArgs by navArgs()
+    private val viewModel: DetailsViewModel by viewModel { parametersOf(args.station.id) }
+    private val navController by lazy { findNavController() }
     private val binding: FragmentDetailsBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpMotion()
         setUpStation()
+        setUpControls()
         setUpSubscribers()
     }
 
@@ -70,36 +75,54 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         binding.company.text = station.company
         binding.address.text = station.place.address
+        binding.brand.text = station.brand.name
+
         binding.cityState.text = getString(
-            R.string.station_city_state,
+            R.string.details_city_state,
             station.place.city,
             station.place.state
         )
+
+        binding.direction.text = station.place.distance
+            ?.let { (it / 1000).formatToKilometers() }
+            ?: getString(R.string.details_go)
+    }
+
+    private fun setUpControls() {
+        val bounceAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
+
+        binding.favorite.setOnCheckedChangeListener { button, isChecked ->
+            if (button.isPressed) {
+                button.startAnimation(bounceAnimation)
+                viewModel.setFavorite(isChecked)
+            }
+        }
+
+        binding.direction.setOnClickListener {
+            // TODO start direction to station
+        }
+
+        binding.back.setOnClickListener { navController.popBackStack() }
     }
 
     private fun setUpSubscribers() {
-        val fuel = Fuel(
-            type = FuelType.GASOLINE,
-            salePrice = BigDecimal.valueOf(4_70, 2),
-            purchasePrice = null,
-            updatedAt = OffsetDateTime.now(),
-            updatedBy = "EzGas"
-        )
+        viewModel.isFavorite.observe(viewLifecycleOwner) {
+            binding.favorite.isChecked = it
+        }
 
-        addFuel(fuel)
-        addFuel(fuel.copy(type = FuelType.ETHANOL))
-        addFuel(fuel.copy(type = FuelType.DIESEL))
-        addFuel(fuel.copy(type = FuelType.DIESEL_S10))
+        viewModel.fuels.observe(viewLifecycleOwner, ::addFuels)
     }
 
-    private fun addFuel(fuel: Fuel) {
-        val priceColor = requireContext().getColor(fuel.type.color)
+    private fun addFuels(fuels: Collection<Fuel>) {
+        fuels.forEach { fuel ->
+            val priceColor = requireContext().getColor(fuel.type.color)
 
-        LayoutFuelBinding.inflate(layoutInflater, binding.contents, true).let {
-            it.lastUpdate.text = fuel.updatedAt.formatToRelativeTimeFromNow(requireContext())
-            it.price.text = fuel.salePrice.formatToBRLSuperscript()
-            it.fuel.setText(fuel.type.text)
-            it.price.setTextColor(priceColor)
+            LayoutFuelBinding.inflate(layoutInflater, binding.contents, true).also {
+                it.lastUpdate.text = fuel.updatedAt.formatToRelativeTimeFromNow(requireContext())
+                it.price.text = fuel.salePrice.formatToBRLSuperscript()
+                it.fuel.setText(fuel.type.text)
+                it.price.setTextColor(priceColor)
+            }
         }
     }
 }

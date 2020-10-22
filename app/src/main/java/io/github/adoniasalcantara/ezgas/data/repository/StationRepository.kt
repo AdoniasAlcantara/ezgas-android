@@ -18,5 +18,13 @@ data class NearbyQuery(
 
 interface StationRepository {
 
+    suspend fun getById(id: Int): Station
+
     fun searchNearby(query: NearbyQuery): Flow<NearbyResult>
+
+    suspend fun addFavorite(stationId: Int)
+
+    suspend fun removeFavorite(stationId: Int)
+
+    suspend fun isFavorite(stationId: Int): Boolean
 }

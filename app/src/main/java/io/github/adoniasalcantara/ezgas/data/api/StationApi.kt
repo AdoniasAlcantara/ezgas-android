@@ -5,9 +5,16 @@ import io.github.adoniasalcantara.ezgas.data.api.response.StationResponse
 import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.data.model.SortCriteria
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface StationApi {
+
+    @GET("stations/{id}")
+    suspend fun fetchById(@Path("id") id: Int): StationResponse
+
+    @GET("stations")
+    suspend fun fetchByIds(@Query("ids") ids: String): List<StationResponse>
 
     @GET("stations/nearby")
     suspend fun searchNearby(
@@ -19,7 +26,4 @@ interface StationApi {
         @Query("pageNumber") pageNumber: Int,
         @Query("pageSize") pageSize: Int
     ): NearbyResponse
-
-    @GET("stations")
-    suspend fun fetchByIds(@Query("ids") ids: String): List<StationResponse>
 }
