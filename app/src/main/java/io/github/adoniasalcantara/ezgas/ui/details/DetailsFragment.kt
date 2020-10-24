@@ -18,6 +18,7 @@ import io.github.adoniasalcantara.ezgas.ui.common.TransitionListenerAdapter
 import io.github.adoniasalcantara.ezgas.util.format.formatToBRLSuperscript
 import io.github.adoniasalcantara.ezgas.util.format.formatToKilometers
 import io.github.adoniasalcantara.ezgas.util.format.formatToRelativeTimeFromNow
+import io.github.adoniasalcantara.ezgas.util.startDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -99,7 +100,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         }
 
         binding.direction.setOnClickListener {
-            // TODO start direction to station
+            val (latitude, longitude) = args.station.place
+            startDirections(requireContext(), latitude, longitude)
         }
 
         binding.back.setOnClickListener { navController.popBackStack() }

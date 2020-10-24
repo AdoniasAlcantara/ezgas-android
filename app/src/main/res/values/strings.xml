@@ -61,6 +61,8 @@
     <string name="error_unavailable">Service unavailable</string>
     <string name="error_code">Error code: %d</string>
 
+    <string name="link_direction">"https://www.google.com/maps/dir/?api=1&amp;destination=%f,%f"</string>
+
     <string name="misc_close">Close</string>
     <string name="misc_apply">Apply</string>
     <string name="misc_refresh">Refresh</string>
