@@ -1,6 +1,8 @@
 package io.github.adoniasalcantara.ezgas.di
 
 import io.github.adoniasalcantara.ezgas.data.api.ApiFactory
+import io.github.adoniasalcantara.ezgas.data.database.Database
+import io.github.adoniasalcantara.ezgas.data.database.FavoriteDao
 import io.github.adoniasalcantara.ezgas.data.repository.StationRepository
 import io.github.adoniasalcantara.ezgas.data.repository.StationRepositoryImpl
 import io.github.adoniasalcantara.ezgas.data.settings.FilterSettings
@@ -13,5 +15,12 @@ val dataModule = module {
 
     single { AssetsCache(androidContext(), size = 1048576 /* 1MB */) }
 
-    single<StationRepository> { StationRepositoryImpl(ApiFactory(androidContext())) }
+    single<FavoriteDao> { Database(androidContext()) }
+
+    single<StationRepository> {
+        StationRepositoryImpl(
+            apiFactory = ApiFactory(androidContext()),
+            favoriteDao = get()
+        )
+    }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Fuel
 import io.github.adoniasalcantara.ezgas.databinding.FragmentDetailsBinding
@@ -95,6 +96,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         binding.favorite.setOnCheckedChangeListener { button, isChecked ->
             if (button.isPressed) {
                 button.startAnimation(bounceAnimation)
+                showFavoriteChanged(isChecked)
                 viewModel.setFavorite(isChecked)
             }
         }
@@ -126,5 +128,15 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 it.price.setTextColor(priceColor)
             }
         }
+    }
+
+    private fun showFavoriteChanged(isFavorite: Boolean) {
+        val message = if (isFavorite) {
+            R.string.details_added_favorite
+        } else {
+            R.string.details_removed_favorite
+        }
+
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

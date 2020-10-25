@@ -25,6 +25,8 @@
     <string name="details_brand">Brand</string>
     <string name="details_fuels">Fuels</string>
     <string name="details_address">Address</string>
+    <string name="details_added_favorite">Added to favorites</string>
+    <string name="details_removed_favorite">Removed from favorites</string>
 
     <string name="fuel_gasoline">Gasoline</string>
     <string name="fuel_ethanol">Ethanol</string>
