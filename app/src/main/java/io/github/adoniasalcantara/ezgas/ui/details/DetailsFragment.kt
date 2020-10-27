@@ -7,10 +7,15 @@ import android.view.animation.AnimationUtils
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
+import com.google.maps.android.ktx.awaitMap
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Fuel
 import io.github.adoniasalcantara.ezgas.databinding.FragmentDetailsBinding
@@ -20,6 +25,7 @@ import io.github.adoniasalcantara.ezgas.util.format.formatToBRLSuperscript
 import io.github.adoniasalcantara.ezgas.util.format.formatToKilometers
 import io.github.adoniasalcantara.ezgas.util.format.formatToRelativeTimeFromNow
 import io.github.adoniasalcantara.ezgas.util.startDirections
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -31,10 +37,24 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private val binding: FragmentDetailsBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        savedInstanceState ?: setUpMap()
         setUpMotion()
         setUpStation()
         setUpControls()
         setUpSubscribers()
+    }
+
+    private fun setUpMap() = lifecycleScope.launch {
+        val fragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val map = fragment.awaitMap()
+
+        val (latitude, longitude) = args.station.place
+        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+            LatLng(latitude, longitude),
+            ZOOM_BLOCK
+        )
+
+        map.moveCamera(cameraUpdate)
     }
 
     private fun setUpMotion() {
@@ -138,5 +158,9 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         }
 
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private companion object {
+        const val ZOOM_BLOCK = 18f
     }
 }

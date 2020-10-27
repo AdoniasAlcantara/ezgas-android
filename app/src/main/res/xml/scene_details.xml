@@ -10,8 +10,9 @@
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:maxAcceleration="100"
-            motion:touchAnchorId="@+id/bottom_sheet"
-            motion:touchAnchorSide="top" />
+            motion:touchAnchorId="@id/bottom_sheet"
+            motion:touchAnchorSide="top"
+            motion:touchRegionId="@id/bottom_sheet" />
 
         <KeyFrameSet>
             <KeyAttribute
@@ -29,8 +30,9 @@
         <OnSwipe
             motion:dragDirection="dragDown"
             motion:maxAcceleration="100"
-            motion:touchAnchorId="@+id/bottom_sheet"
-            motion:touchAnchorSide="top" />
+            motion:touchAnchorId="@id/bottom_sheet"
+            motion:touchAnchorSide="top"
+            motion:touchRegionId="@id/bottom_sheet" />
     </Transition>
 
     <ConstraintSet android:id="@+id/top">
@@ -53,8 +55,8 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/checkBox" />
+            android:id="@+id/checkBox"
+            motion:layout_constraintEnd_toEndOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/middle">
