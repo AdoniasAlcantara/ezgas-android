@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 
 typealias NearbyResult = PagingData<Station>
 
+typealias FavoriteResult = Resource<List<Station>>
+
 data class NearbyQuery(
     val latitude: Double,
     val longitude: Double,
@@ -18,6 +20,8 @@ data class NearbyQuery(
 
 interface StationRepository {
 
+    val favoritesFlow: Flow<FavoriteResult?>
+
     suspend fun getById(id: Int): Station
 
     fun searchNearby(query: NearbyQuery): Flow<NearbyResult>
@@ -27,4 +31,6 @@ interface StationRepository {
     suspend fun removeFavorite(stationId: Int)
 
     suspend fun isFavorite(stationId: Int): Boolean
+
+    suspend fun refreshFavorites()
 }

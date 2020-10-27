@@ -18,10 +18,7 @@ class FavoritesFilterDialog : BaseDialogFragment(R.layout.dialog_favorites_filte
     private val binding: DialogFavoritesFilterBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lifecycleScope.launch {
-            val fuelType = viewModel.fuelType.first()
-            setUpFuelOptions(fuelType)
-        }
+        viewModel.fuelType.observe(viewLifecycleOwner, ::setUpFuelOptions)
 
         binding.close.setOnClickListener { dismiss() }
 

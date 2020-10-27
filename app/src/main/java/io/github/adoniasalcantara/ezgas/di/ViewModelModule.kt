@@ -9,7 +9,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { StationsViewModel(repository = get(), settings = get()) }
 
-    viewModel { FavoritesViewModel(settings = get()) }
+    viewModel { FavoritesViewModel(repository = get(), settings = get()) }
 
     viewModel { (stationId: Int) -> DetailsViewModel(stationId = stationId, repository = get()) }
 }
