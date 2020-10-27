@@ -57,6 +57,8 @@
     <string name="error_retry">Retry</string>
     <string name="error_no_results_title">No results</string>
     <string name="error_no_results_message">Please try changing filter options to get more results.</string>
+    <string name="error_no_favorites_title">You don\'t have any favorites yet</string>
+    <string name="error_no_favorites_message">Once you favorite a station, you\'ll see them here.</string>
     <string name="error_network_title">Network Error</string>
     <string name="error_network_message">Please check your Internet connection and try again.</string>
     <string name="error_unexpected">Sorry, an unexpected error occurred</string>

@@ -14,6 +14,8 @@ import io.github.adoniasalcantara.ezgas.databinding.LayoutStationListBinding
 import io.github.adoniasalcantara.ezgas.ui.common.SpacingDecoration
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.HttpException
+import java.io.IOException
 
 class FavoritesFragment : Fragment(R.layout.layout_station_list) {
 
@@ -66,8 +68,16 @@ class FavoritesFragment : Fragment(R.layout.layout_station_list) {
 
                     is Resource.Error -> {
                         refresh.isRefreshing = false
-                        loading.hide()
                         handleError(result.error)
+                    }
+
+                    null -> {
+                        refresh.isRefreshing = false
+                        loading.showError {
+                            image(R.drawable.img_no_favorites)
+                            title(R.string.error_no_favorites_title)
+                            message(R.string.error_no_favorites_message)
+                        }
                     }
                 }
             }
@@ -79,6 +89,29 @@ class FavoritesFragment : Fragment(R.layout.layout_station_list) {
     }
 
     private fun handleError(error: Throwable) {
-        // TODO
+        binding.loading.apply {
+            when (error) {
+                is HttpException -> showError {
+                    image(R.drawable.img_unavailable)
+                    title(R.string.error_unavailable)
+                    message = getString(R.string.error_code, error.code())
+                    retryCallback = viewModel::refresh
+                }
+
+                is IOException -> showError {
+                    image(R.drawable.img_no_connection)
+                    title(R.string.error_network_title)
+                    message(R.string.error_network_message)
+                    retryCallback = viewModel::refresh
+                }
+
+                else -> showError {
+                    image(R.drawable.ic_error)
+                    title(R.string.error)
+                    message(R.string.error_unexpected)
+                    retryCallback = viewModel::refresh
+                }
+            }
+        }
     }
 }
