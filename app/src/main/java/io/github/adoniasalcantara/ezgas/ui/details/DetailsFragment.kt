@@ -44,7 +44,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private val assets: AssetsCache by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        savedInstanceState ?: setUpMap()
+        setUpMap()
         setUpMotion()
         setUpStation()
         setUpControls()

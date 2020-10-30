@@ -51,5 +51,6 @@
     <dimen name="marker_size">48dp</dimen>
 
     <dimen name="sheet_peek">90dp</dimen>
+    <dimen name="sheet_elevation">4dp</dimen>
 
 </resources>

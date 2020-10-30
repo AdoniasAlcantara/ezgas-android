@@ -40,6 +40,7 @@
             android:id="@+id/bottom_sheet"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:elevation="0dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
@@ -54,9 +55,6 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
-        <Constraint
-            android:id="@+id/checkBox"
-            motion:layout_constraintEnd_toEndOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/middle">
@@ -64,6 +62,7 @@
             android:id="@+id/bottom_sheet"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:elevation="@dimen/sheet_elevation"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
@@ -85,6 +84,7 @@
             android:id="@+id/bottom_sheet"
             android:layout_width="0dp"
             android:layout_height="@dimen/sheet_peek"
+            android:elevation="@dimen/sheet_elevation"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
