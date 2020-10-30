@@ -48,6 +48,8 @@
     <dimen name="card_brand">42dp</dimen>
     <dimen name="card_price">28sp</dimen>
 
+    <dimen name="marker_size">48dp</dimen>
+
     <dimen name="sheet_peek">90dp</dimen>
 
 </resources>
