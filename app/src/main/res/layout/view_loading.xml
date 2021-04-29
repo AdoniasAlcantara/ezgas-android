@@ -7,15 +7,13 @@
     android:background="?android:attr/colorBackground"
     android:clickable="true">
 
-    <com.google.android.material.progressindicator.ProgressIndicator
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/loading_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_huge"
         android:indeterminate="true"
-        app:circularRadius="@dimen/progress_radius"
         app:indicatorSize="@dimen/progress_indicator_size"
-        app:indicatorType="circular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

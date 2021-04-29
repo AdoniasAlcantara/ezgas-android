@@ -1,17 +1,21 @@
 package io.github.adoniasalcantara.ezgas.data.settings
 
 import android.content.Context
-import androidx.datastore.preferences.createDataStore
-import androidx.datastore.preferences.edit
-import androidx.datastore.preferences.preferencesKey
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import io.github.adoniasalcantara.ezgas.data.model.Filter
 import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.data.model.SortCriteria
 import kotlinx.coroutines.flow.map
 
-class FilterSettings(context: Context) {
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("filter_prefs")
 
-    private val dataStore = context.createDataStore("filter_prefs")
+class FilterSettings(context: Context) {
+    private val dataStore = context.dataStore
 
     val filterFlow = dataStore.data.map { prefs ->
         Filter(
@@ -34,8 +38,8 @@ class FilterSettings(context: Context) {
     }
 
     private companion object {
-        val FUEL_TYPE = preferencesKey<String>("fuel_type")
-        val SORT_CRITERIA = preferencesKey<String>("sort_criteria")
-        val DISTANCE = preferencesKey<Float>("distance")
+        val FUEL_TYPE = stringPreferencesKey("fuel_type")
+        val SORT_CRITERIA = stringPreferencesKey("sort_criteria")
+        val DISTANCE = floatPreferencesKey("distance")
     }
 }
