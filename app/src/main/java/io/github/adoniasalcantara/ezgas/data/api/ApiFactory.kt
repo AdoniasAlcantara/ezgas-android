@@ -23,7 +23,7 @@ class ApiFactory(context: Context) {
         val client = OkHttpClient.Builder()
             .addInterceptor(apiKeyInterceptor)
             .addInterceptor(logging)
-            .callTimeout(CALL_TIMEOUT, TimeUnit.SECONDS)
+            .callTimeout(60L, TimeUnit.SECONDS)
             .build()
 
         val converter = Moshi.Builder()
@@ -34,15 +34,10 @@ class ApiFactory(context: Context) {
 
         retrofit = Retrofit.Builder()
             .client(client)
-            .baseUrl(BASE_URL)
+            .baseUrl(context.getString(R.string.api_url))
             .addConverterFactory(converter)
             .build()
     }
 
     fun stationApi(): StationApi = retrofit.create(StationApi::class.java)
-
-    private companion object {
-        const val BASE_URL = "https://ezgas-backend.herokuapp.com/"
-        const val CALL_TIMEOUT = 60L // Seconds
-    }
 }
