@@ -5,9 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Station(
-    val id: Int,
+    val id: String,
     val company: String,
     val brand: Brand,
     val place: Place,
-    val fuels: Set<Fuel>
+    val fuels: Map<FuelType, Fuel>
 ) : Parcelable

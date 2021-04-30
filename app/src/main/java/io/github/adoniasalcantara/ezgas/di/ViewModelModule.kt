@@ -11,5 +11,5 @@ val viewModelModule = module {
 
     viewModel { FavoritesViewModel(repository = get(), settings = get()) }
 
-    viewModel { (stationId: Int) -> DetailsViewModel(stationId = stationId, repository = get()) }
+    viewModel { (stationId: String) -> DetailsViewModel(stationId = stationId, repository = get()) }
 }

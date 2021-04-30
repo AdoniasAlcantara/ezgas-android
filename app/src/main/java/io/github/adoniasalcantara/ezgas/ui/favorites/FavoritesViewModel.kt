@@ -46,10 +46,7 @@ class FavoritesViewModel(
     ): FavoriteResult? {
         if (result !is Resource.Success) return result
 
-        val selector = { station: Station ->
-            station.fuels.find { it.type == fuelType }?.salePrice
-        }
-
+        val selector = { station: Station -> station.fuels[fuelType]?.price }
         val comparator = compareBy(nullsLast(), selector)
         val sorted = result.data.sortedWith(comparator)
 

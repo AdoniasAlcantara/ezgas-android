@@ -2,9 +2,9 @@ package io.github.adoniasalcantara.ezgas.data.database
 
 interface FavoriteDao {
 
-    fun findAll(): Set<Int>
+    fun findAll(): Set<String>
 
-    fun add(stationId: Int)
+    fun add(stationId: String)
 
-    fun remove(stationId: Int)
+    fun remove(stationId: String)
 }

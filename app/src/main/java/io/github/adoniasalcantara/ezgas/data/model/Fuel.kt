@@ -3,13 +3,10 @@ package io.github.adoniasalcantara.ezgas.data.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.math.BigDecimal
-import java.time.OffsetDateTime
+import java.time.LocalDate
 
 @Parcelize
 data class Fuel(
-    val type: FuelType,
-    val salePrice: BigDecimal,
-    val purchasePrice: BigDecimal?,
-    val updatedAt: OffsetDateTime,
-    val updatedBy: String
+    val updatedAt: LocalDate,
+    val price: BigDecimal
 ) : Parcelable

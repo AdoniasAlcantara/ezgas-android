@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.adoniasalcantara.ezgas.data.repository.StationRepository
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val stationId: Int, private val repository: StationRepository) :
+class DetailsViewModel(private val stationId: String, private val repository: StationRepository) :
     ViewModel() {
 
     val fuels = liveData(viewModelScope.coroutineContext) {

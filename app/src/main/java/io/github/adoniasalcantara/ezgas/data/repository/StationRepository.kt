@@ -22,15 +22,15 @@ interface StationRepository {
 
     val favoritesFlow: Flow<FavoriteResult?>
 
-    suspend fun getById(id: Int): Station
+    suspend fun getById(id: String): Station
 
     fun searchNearby(query: NearbyQuery): Flow<NearbyResult>
 
-    suspend fun addFavorite(stationId: Int)
+    suspend fun addFavorite(stationId: String)
 
-    suspend fun removeFavorite(stationId: Int)
+    suspend fun removeFavorite(stationId: String)
 
-    suspend fun isFavorite(stationId: Int): Boolean
+    suspend fun isFavorite(stationId: String): Boolean
 
     suspend fun refreshFavorites()
 }

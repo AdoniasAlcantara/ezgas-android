@@ -3,8 +3,6 @@ package io.github.adoniasalcantara.ezgas.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import io.github.adoniasalcantara.ezgas.data.api.ApiFactory
-import io.github.adoniasalcantara.ezgas.data.api.response.toStation
-import io.github.adoniasalcantara.ezgas.data.api.response.toStations
 import io.github.adoniasalcantara.ezgas.data.database.FavoriteDao
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
@@ -26,8 +24,8 @@ class StationRepositoryImpl(apiFactory: ApiFactory, private val favoriteDao: Fav
         }
     }
 
-    override suspend fun getById(id: Int) = withContext(Dispatchers.IO) {
-        api.fetchById(id).toStation()
+    override suspend fun getById(id: String) = withContext(Dispatchers.IO) {
+        api.fetchById(id)
     }
 
     override fun searchNearby(query: NearbyQuery): Flow<NearbyResult> {
@@ -40,17 +38,17 @@ class StationRepositoryImpl(apiFactory: ApiFactory, private val favoriteDao: Fav
         return Pager(config) { NearbySource(api, query) }.flow
     }
 
-    override suspend fun addFavorite(stationId: Int) = withContext(Dispatchers.IO) {
+    override suspend fun addFavorite(stationId: String) = withContext(Dispatchers.IO) {
         favoriteDao.add(stationId)
         refreshFavorites()
     }
 
-    override suspend fun removeFavorite(stationId: Int) = withContext(Dispatchers.IO) {
+    override suspend fun removeFavorite(stationId: String) = withContext(Dispatchers.IO) {
         favoriteDao.remove(stationId)
         refreshFavorites()
     }
 
-    override suspend fun isFavorite(stationId: Int): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun isFavorite(stationId: String): Boolean = withContext(Dispatchers.IO) {
         stationId in favoriteDao.findAll()
     }
 
@@ -63,10 +61,7 @@ class StationRepositoryImpl(apiFactory: ApiFactory, private val favoriteDao: Fav
             _favoritesFlow.value = Resource.Loading()
 
             try {
-                val stations = api
-                    .fetchByIds(stationIds.joinToString(","))
-                    .toStations()
-
+                val stations = api.fetchByIds(stationIds.joinToString(","))
                 _favoritesFlow.value = Resource.Success(stations)
             } catch (error: Throwable) {
                 _favoritesFlow.value = Resource.Error(error)

@@ -22,6 +22,7 @@ import com.google.maps.android.ktx.awaitMap
 import com.google.maps.android.ktx.model.cameraPosition
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Fuel
+import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.databinding.FragmentDetailsBinding
 import io.github.adoniasalcantara.ezgas.databinding.LayoutFuelBinding
 import io.github.adoniasalcantara.ezgas.ui.common.TransitionListenerAdapter
@@ -53,7 +54,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun setUpMap() = lifecycleScope.launch {
         val map = (childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).awaitMap()
-        val position = args.station.place.run { LatLng(latitude, longitude) }
+        val position = args.station.place.position.run { LatLng(latitude, longitude) }
 
         val cameraPosition = cameraPosition {
             target(position)
@@ -117,7 +118,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         val station = args.station
 
         binding.company.text = station.company
-        binding.address.text = station.place.address
+        binding.address.text = station.place.shortAddress()
         binding.brand.text = station.brand.name
 
         binding.cityState.text = getString(
@@ -127,7 +128,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         )
 
         binding.direction.text = station.place.distance
-            ?.let { (it / 1000).formatToKilometers() }
+            ?.formatToKilometers()
             ?: getString(R.string.details_go)
     }
 
@@ -143,7 +144,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         }
 
         binding.direction.setOnClickListener {
-            val (latitude, longitude) = args.station.place
+            val (latitude, longitude) = args.station.place.position
             startDirections(requireContext(), latitude, longitude)
         }
 
@@ -158,14 +159,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         viewModel.fuels.observe(viewLifecycleOwner, ::addFuels)
     }
 
-    private fun addFuels(fuels: Collection<Fuel>) {
-        fuels.forEach { fuel ->
-            val priceColor = requireContext().getColor(fuel.type.color)
+    private fun addFuels(fuels: Map<FuelType, Fuel>) {
+        fuels.forEach { (fuelType, fuel) ->
+            val priceColor = requireContext().getColor(fuelType.color)
 
             LayoutFuelBinding.inflate(layoutInflater, binding.contents, true).also {
                 it.lastUpdate.text = fuel.updatedAt.formatToRelativeTimeFromNow(requireContext())
-                it.price.text = fuel.salePrice.formatToBRLSuperscript()
-                it.fuel.setText(fuel.type.text)
+                it.price.text = fuel.price.formatToBRLSuperscript()
+                it.fuel.setText(fuelType.text)
                 it.price.setTextColor(priceColor)
             }
         }

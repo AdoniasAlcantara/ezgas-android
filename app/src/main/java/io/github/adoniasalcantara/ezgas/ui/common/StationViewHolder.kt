@@ -32,10 +32,8 @@ class StationViewHolder(
 
     private fun setUpStation() {
         binding.company.text = station.company
-        binding.address.text = station.place.run { address ?: "$city, $state" }
-        binding.distance.text = station.place.distance?.let {
-            (it / 1000).formatToKilometers()
-        }
+        binding.address.text = station.place.fullAddress()
+        binding.distance.text = station.place.distance?.formatToKilometers()
     }
 
     private fun setUpBrand() {
@@ -52,8 +50,9 @@ class StationViewHolder(
 
     private fun setUpPrice(fuelType: FuelType) {
         val color = context.getColor(fuelType.color)
-        val fuel = station.fuels.find { it.type == fuelType }
-        val price = fuel?.salePrice
+        val fuel = station.fuels[fuelType]
+        val price = fuel
+            ?.price
             ?.formatToBRLSuperscript()
             ?: context.getString(R.string.fuel_empty_price)
 
@@ -62,6 +61,8 @@ class StationViewHolder(
             setTextColor(color)
         }
 
-        binding.lastUpdate.text = fuel?.updatedAt?.formatToRelativeTimeFromNow(context)
+        binding.lastUpdate.text = fuel
+            ?.updatedAt
+            ?.formatToRelativeTimeFromNow(context)
     }
 }

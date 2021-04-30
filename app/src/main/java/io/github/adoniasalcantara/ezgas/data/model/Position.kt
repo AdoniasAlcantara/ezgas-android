@@ -4,4 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Brand(val id: String, val name: String) : Parcelable
+data class Position(
+    val latitude: Double,
+    val longitude: Double
+) : Parcelable

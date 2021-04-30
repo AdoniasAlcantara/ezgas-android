@@ -10,12 +10,12 @@ class Database(context: Context) :
     SQLiteOpenHelper(context, DATABASE, null, VERSION),
     FavoriteDao {
 
-    override fun findAll(): Set<Int> {
+    override fun findAll(): Set<String> {
         val cursor = readableDatabase.query(TBL_FAVORITE, null, null, null, null, null, null, null)
-        val stationIds = mutableSetOf<Int>()
+        val stationIds = mutableSetOf<String>()
 
         while (cursor.moveToNext()) {
-            stationIds.add(cursor.getInt(0))
+            stationIds.add(cursor.getString(0))
         }
 
         cursor.close()
@@ -23,18 +23,18 @@ class Database(context: Context) :
         return stationIds
     }
 
-    override fun add(stationId: Int) {
+    override fun add(stationId: String) {
         val values = contentValuesOf(COL_STATION_ID to stationId)
         writableDatabase.insert(TBL_FAVORITE, null, values)
     }
 
-    override fun remove(stationId: Int) {
-        val where = "$COL_STATION_ID = $stationId"
-        writableDatabase.delete(TBL_FAVORITE, where, null)
+    override fun remove(stationId: String) {
+        val where = "$COL_STATION_ID = ?"
+        writableDatabase.delete(TBL_FAVORITE, where, arrayOf(stationId))
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE $TBL_FAVORITE($COL_STATION_ID INTEGER PRIMARY KEY)")
+        db.execSQL("CREATE TABLE $TBL_FAVORITE($COL_STATION_ID CHARACTER(24) PRIMARY KEY)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

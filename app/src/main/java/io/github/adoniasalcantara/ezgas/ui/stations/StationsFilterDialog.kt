@@ -53,7 +53,7 @@ class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter)
                 value.toInt().formatToKilometers()
             }
 
-            value = distance / 1000
+            value = distance
         }
     }
 
@@ -61,7 +61,7 @@ class StationsFilterDialog : BaseDialogFragment(R.layout.dialog_stations_filter)
         val filter = binding.run {
             val fuelType = FuelType.fromId(fuelOptions.checkedButtonId)
             val sortCriteria = SortCriteria.fromId(sortOptions.checkedButtonId)
-            val distance = sliderDistance.value * 1000
+            val distance = sliderDistance.value
 
             Filter(fuelType, sortCriteria, distance)
         }

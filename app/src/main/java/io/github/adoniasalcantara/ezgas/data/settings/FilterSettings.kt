@@ -25,7 +25,7 @@ class FilterSettings(context: Context) {
             sortCriteria = prefs[SORT_CRITERIA]?.let(SortCriteria::valueOf)
                 ?: SortCriteria.PRICE,
 
-            distance = prefs[DISTANCE] ?: 25_000f
+            distance = prefs[DISTANCE] ?: 25f
         )
     }
 

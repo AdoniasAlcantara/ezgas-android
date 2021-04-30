@@ -1,6 +1,7 @@
 package io.github.adoniasalcantara.ezgas.ui.stations
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.asLiveData
@@ -161,8 +162,14 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
                     title(R.string.error)
                     message(R.string.error_unexpected)
                     retryCallback = ::refreshNearbyStations
+
+                    Log.e(TAG, "An unexpected error occurred", error)
                 }
             }
         }
+    }
+
+    private companion object {
+        val TAG = StationsFragment::class.qualifiedName
     }
 }

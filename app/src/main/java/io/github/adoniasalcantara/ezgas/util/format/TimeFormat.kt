@@ -2,10 +2,15 @@ package io.github.adoniasalcantara.ezgas.util.format
 
 import android.content.Context
 import io.github.adoniasalcantara.ezgas.R
-import java.time.Duration
-import java.time.OffsetDateTime
+import java.time.*
 
-fun OffsetDateTime.formatToRelativeTimeFromNow(context: Context): String {
+fun LocalDate.formatToRelativeTimeFromNow(context: Context): String {
+    return LocalDateTime
+        .of(this, LocalTime.MIN)
+        .formatToRelativeTimeFromNow(context)
+}
+
+fun LocalDateTime.formatToRelativeTimeFromNow(context: Context): String {
     val diff = Duration.between(this, OffsetDateTime.now())
     val seconds = diff.seconds
 

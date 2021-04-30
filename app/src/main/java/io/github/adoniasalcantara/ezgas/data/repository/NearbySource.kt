@@ -2,7 +2,6 @@ package io.github.adoniasalcantara.ezgas.data.repository
 
 import androidx.paging.PagingSource
 import io.github.adoniasalcantara.ezgas.data.api.StationApi
-import io.github.adoniasalcantara.ezgas.data.api.response.toStations
 import io.github.adoniasalcantara.ezgas.data.model.Station
 
 class NearbySource(private val api: StationApi, private val query: NearbyQuery) :
@@ -24,11 +23,10 @@ class NearbySource(private val api: StationApi, private val query: NearbyQuery) 
             )
         }
 
-        val stations = response.content.toStations()
         val nextPage = if (response.last) null else pageNumber + 1
 
         LoadResult.Page(
-            data = stations,
+            data = response.content,
             prevKey = null,
             nextKey = nextPage
         )

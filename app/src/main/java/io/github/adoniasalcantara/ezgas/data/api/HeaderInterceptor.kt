@@ -13,6 +13,9 @@ class HeaderInterceptor(private val entry: Pair<String, String>) : Interceptor {
             .addHeader(key, value)
             .build()
 
-        return chain.proceed(request)
+        val response = chain.proceed(request)
+        //println(response.body?.string())
+
+        return response
     }
 }
