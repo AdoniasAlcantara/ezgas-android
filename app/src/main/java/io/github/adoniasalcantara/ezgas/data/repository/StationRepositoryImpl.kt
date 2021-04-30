@@ -4,12 +4,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import io.github.adoniasalcantara.ezgas.data.api.ApiFactory
 import io.github.adoniasalcantara.ezgas.data.database.FavoriteDao
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-@FlowPreview
 class StationRepositoryImpl(apiFactory: ApiFactory, private val favoriteDao: FavoriteDao) :
     StationRepository {
 
