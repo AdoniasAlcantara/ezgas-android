@@ -12,7 +12,6 @@ import io.github.adoniasalcantara.ezgas.data.model.Station
 import io.github.adoniasalcantara.ezgas.data.repository.Resource
 import io.github.adoniasalcantara.ezgas.databinding.LayoutStationListBinding
 import io.github.adoniasalcantara.ezgas.ui.common.SpacingDecoration
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.HttpException
 import java.io.IOException
@@ -22,7 +21,7 @@ class FavoritesFragment : Fragment(R.layout.layout_station_list) {
     private val viewModel: FavoritesViewModel by viewModel()
     private val navController by lazy { findNavController() }
     private val binding: LayoutStationListBinding by viewBinding()
-    private val adapter: FavoritesAdapter by inject()
+    private val adapter = FavoritesAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpList()

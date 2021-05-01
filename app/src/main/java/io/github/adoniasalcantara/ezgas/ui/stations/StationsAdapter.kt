@@ -8,10 +8,8 @@ import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.data.model.Station
 import io.github.adoniasalcantara.ezgas.databinding.LayoutStationItemBinding
 import io.github.adoniasalcantara.ezgas.ui.common.StationViewHolder
-import io.github.adoniasalcantara.ezgas.util.AssetsCache
 
-class StationsAdapter(private val assets: AssetsCache) :
-    PagingDataAdapter<Station, StationViewHolder>(StationDiffer()) {
+class StationsAdapter : PagingDataAdapter<Station, StationViewHolder>(StationDiffer()) {
 
     lateinit var fuelType: FuelType
     lateinit var onStationClick: (Station) -> Unit
@@ -23,7 +21,7 @@ class StationsAdapter(private val assets: AssetsCache) :
             false
         )
 
-        return StationViewHolder(binding, assets, onStationClick)
+        return StationViewHolder(binding, onStationClick)
     }
 
     override fun onBindViewHolder(holder: StationViewHolder, position: Int) {

@@ -31,7 +31,7 @@ class StationsFragment : Fragment(R.layout.layout_station_list) {
     private val viewModel: StationsViewModel by sharedViewModel()
     private val navController by lazy { findNavController() }
     private val binding: LayoutStationListBinding by viewBinding()
-    private val adapter: StationsAdapter by inject()
+    private val adapter = StationsAdapter()
     private val locationUpdates: LocationLiveData by inject()
     private val locationResolver: LocationSettingsResolver = get { parametersOf(this) }
 

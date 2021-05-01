@@ -7,9 +7,8 @@ import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.data.model.Station
 import io.github.adoniasalcantara.ezgas.databinding.LayoutStationItemBinding
 import io.github.adoniasalcantara.ezgas.ui.common.StationViewHolder
-import io.github.adoniasalcantara.ezgas.util.AssetsCache
 
-class FavoritesAdapter(private val assets: AssetsCache) : RecyclerView.Adapter<StationViewHolder>() {
+class FavoritesAdapter : RecyclerView.Adapter<StationViewHolder>() {
 
     private var stations = emptyList<Station>()
     lateinit var fuelType: FuelType
@@ -24,7 +23,7 @@ class FavoritesAdapter(private val assets: AssetsCache) : RecyclerView.Adapter<S
             false
         )
 
-        return StationViewHolder(binding, assets, onStationClick)
+        return StationViewHolder(binding, onStationClick)
     }
 
     override fun onBindViewHolder(holder: StationViewHolder, position: Int) {

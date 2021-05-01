@@ -1,18 +1,17 @@
 package io.github.adoniasalcantara.ezgas.ui.common
 
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.data.model.Station
 import io.github.adoniasalcantara.ezgas.databinding.LayoutStationItemBinding
-import io.github.adoniasalcantara.ezgas.util.AssetsCache
 import io.github.adoniasalcantara.ezgas.util.format.formatToBRLSuperscript
 import io.github.adoniasalcantara.ezgas.util.format.formatToKilometers
 import io.github.adoniasalcantara.ezgas.util.format.formatToRelativeTimeFromNow
 
 class StationViewHolder(
     private val binding: LayoutStationItemBinding,
-    private val assets: AssetsCache,
     onStationClick: (Station) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -37,15 +36,13 @@ class StationViewHolder(
     }
 
     private fun setUpBrand() {
-        val bitmap = assets.getBitmapOrDefault(
-            path = "brands/${station.brand.id}.png",
-            default = R.drawable.ic_white_flag
-        )
+        val resource = context.getString(R.string.assets_url, station.brand.id)
+        binding.brand.contentDescription = station.brand.name
 
-        binding.brand.apply {
-            contentDescription = station.brand.name
-            setImageBitmap(bitmap)
-        }
+        Picasso.get()
+            .load(resource)
+            .placeholder(R.drawable.ic_white_flag)
+            .into(binding.brand)
     }
 
     private fun setUpPrice(fuelType: FuelType) {
