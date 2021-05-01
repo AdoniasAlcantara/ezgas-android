@@ -41,7 +41,7 @@ class StationViewHolder(
 
         Picasso.get()
             .load(resource)
-            .placeholder(R.drawable.ic_white_flag)
+            .placeholder(R.drawable.ic_brand_placeholder)
             .into(binding.brand)
     }
 

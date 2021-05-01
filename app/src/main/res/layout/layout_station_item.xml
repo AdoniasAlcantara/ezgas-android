@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_white_flag" />
+            tools:src="@drawable/ic_brand_placeholder" />
 
         <TextView
             android:id="@+id/company"

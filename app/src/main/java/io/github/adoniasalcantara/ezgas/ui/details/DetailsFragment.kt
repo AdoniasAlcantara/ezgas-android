@@ -68,7 +68,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
             val bitmap = assets.getBitmapOrDefault(
                 path = "brands/${args.station.brand.id}.png",
-                default = R.drawable.ic_white_flag
+                default = R.drawable.ic_brand_placeholder
             ).run {
                 Bitmap.createScaledBitmap(this, markerSize, markerSize, false)
             }
