@@ -1,6 +1,5 @@
 package io.github.adoniasalcantara.ezgas.ui.details
 
-import android.graphics.Bitmap
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
@@ -14,25 +13,23 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.ktx.addMarker
 import com.google.maps.android.ktx.awaitMap
-import com.google.maps.android.ktx.model.cameraPosition
+import com.squareup.picasso.Picasso
 import io.github.adoniasalcantara.ezgas.R
 import io.github.adoniasalcantara.ezgas.data.model.Fuel
 import io.github.adoniasalcantara.ezgas.data.model.FuelType
 import io.github.adoniasalcantara.ezgas.databinding.FragmentDetailsBinding
 import io.github.adoniasalcantara.ezgas.databinding.LayoutFuelBinding
+import io.github.adoniasalcantara.ezgas.ui.common.DeferredMarker
 import io.github.adoniasalcantara.ezgas.ui.common.TransitionListenerAdapter
-import io.github.adoniasalcantara.ezgas.util.AssetsCache
 import io.github.adoniasalcantara.ezgas.util.format.formatToBRLSuperscript
 import io.github.adoniasalcantara.ezgas.util.format.formatToKilometers
 import io.github.adoniasalcantara.ezgas.util.format.formatToRelativeTimeFromNow
 import io.github.adoniasalcantara.ezgas.util.startDirections
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -42,7 +39,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private val viewModel: DetailsViewModel by viewModel { parametersOf(args.station.id) }
     private val navController by lazy { findNavController() }
     private val binding: FragmentDetailsBinding by viewBinding()
-    private val assets: AssetsCache by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpMap()
@@ -55,28 +51,15 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private fun setUpMap() = lifecycleScope.launch {
         val map = (childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).awaitMap()
         val position = args.station.place.position.run { LatLng(latitude, longitude) }
+        val markerSize = resources.getDimensionPixelSize(R.dimen.marker_size)
+        val marker = map.addMarker { position(position) }
 
-        val cameraPosition = cameraPosition {
-            target(position)
-            zoom(ZOOM_BLOCK)
-        }
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, ZOOM_BLOCK))
 
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-
-        map.addMarker {
-            val markerSize = resources.getDimensionPixelSize(R.dimen.marker_size)
-
-            val bitmap = assets.getBitmapOrDefault(
-                path = "brands/${args.station.brand.id}.png",
-                default = R.drawable.ic_brand_placeholder
-            ).run {
-                Bitmap.createScaledBitmap(this, markerSize, markerSize, false)
-            }
-
-            val bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
-            icon(bitmapDescriptor)
-            position(position)
-        }
+        Picasso.get()
+            .load(getString(R.string.assets_url, args.station.brand.id))
+            .placeholder(R.drawable.ic_brand_placeholder)
+            .into(DeferredMarker(marker, markerSize))
     }
 
     private fun setUpMotion() {
